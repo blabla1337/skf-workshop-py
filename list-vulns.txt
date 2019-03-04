@@ -12,6 +12,6 @@
 12 JWT token is forgeable
 13 Username enumeration
 14 SQL injection
-15 Username enumeration
+15 vulnerable libraries
 16 Obscure backdoor
 17 Client side constraints
