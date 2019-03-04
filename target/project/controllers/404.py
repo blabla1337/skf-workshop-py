@@ -44,7 +44,7 @@ def page_not_found(e):
         <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#00C8A1" role="navigation">
         
         <div class="navbar-header">
-            <a class="navbar-brand" href="#" style="color:white;">Xebia hacking assessment</a>
+            <a class="navbar-brand" href="#" style="color:white;">Hacking assessment</a>
         </div>
 
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
