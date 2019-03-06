@@ -2,6 +2,10 @@ from project import app
 from project.models.Dashboard import *
 from flask import render_template, request, send_file, make_response, redirect, session
 from xml.dom import minidom
+from xml.dom.pulldom import parse
+from xml.sax import make_parser
+from xml.sax.handler import feature_external_ges
+
 import os
 
 from xml.dom.pulldom import START_ELEMENT, parseString
@@ -12,7 +16,12 @@ def validator():
 
 @app.route("/validator/upload", methods=['GET', 'POST'])
 def XML_validator():
-    doc = parseString(request.form['customers'])
+    parser = make_parser()
+    parser.setFeature(feature_external_ges, True)
+    text_file = open("user_input.xml", "w+")
+    text_file.write(request.form['customers'])
+    text_file.close()
+    doc = parse("user_input.xml", parser=parser)
     try:
         for event, node in doc:
             if event == START_ELEMENT and node.localName == "customers":
@@ -33,19 +42,14 @@ def XML_download():
     response.headers.set("Content-Disposition", "attachment; filename="+fileName)
     return response
 
-def allowed_file(filename):
-    ALLOWED_EXTENSIONS  = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'html'])
-    return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
-
 @app.route("/validator/uploads", methods=['GET', 'POST'])
 def XML_upload():
     if request.method == 'POST':
         file = request.files['file']
         print(file)
-        if file and allowed_file(file.filename):
+        if file:
             filename = file.filename
-            print(os.path.join)
-            file.save('uploads/'+filename)
+            file.save(filename)
             uploaded = "File was uploaded succesfully to the application, the staff members will process this information soon!"
             return render_template("validator/index.html",uploaded = uploaded)
         uploaded = "something went wrong, please try again. If the problem is repetitive please contact an administrator!"
