@@ -10,6 +10,6 @@ class Messaging:
 
     def storeMessages(self, name, message, link):
 	    db = database_con()
-	    cur = db.execute(''' INSERT INTO messages(name, message, link, timestamp)VALUES(?,?,?,?)''',(name, message, link, datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p") ))
+	    cur = db.execute(''' INSERT INTO messages(name, message, link, timestamp)VALUES(?,?,?,?)''',(name, message, link, "2019" ))
 	    return db.commit()
     

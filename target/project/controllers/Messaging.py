@@ -11,9 +11,9 @@ def messaging():
 
 @app.route("/messaging/new", methods=['GET', 'POST'])
 def store_messages():
-    name    = request.form.get('name')
-    message = request.form.get('message')
-    link   = request.form.get('link')
+    name    = request.form['name']
+    message = request.form['message']
+    link   = request.form['link']
     
     sqli  = Messaging()
     messages = sqli.storeMessages(name, message, link)
