@@ -6,9 +6,9 @@ python3-dev \
 python3-pip \ 
 git
 
-COPY . /app
+COPY --chown=root:root . /app
 WORKDIR /app
 
-RUN pip3 install -r requirements.txt
-CMD [ "code-server" ]
+RUN pip3 install -r target/requirements.txt
+CMD [ "code-server", "--password=workshop" ]
 
