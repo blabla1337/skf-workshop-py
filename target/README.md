@@ -7,7 +7,7 @@ docker build -t  target .
 
 RUN
 ```
-docker run -p 80:80 target 
+docker docker run -i -t -p 127.0.0.1:8443:8443 -p 127.0.0.1:5000:5000 target 
 ```
 
 
