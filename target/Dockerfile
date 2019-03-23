@@ -1,15 +1,14 @@
-FROM alpine:3.7
+FROM codercom/code-server:latest
 MAINTAINER Glenn ten Cate <glenn.ten.cate@owasp.org>
 
-RUN apk update --no-cache && apk add python3 \
+RUN apt-get update && apt-get install -y python3 \
 python3-dev \
-py3-pip \ 
-git \
-bash
+python3-pip \ 
+git
 
 COPY . /app
 WORKDIR /app
 
 RUN pip3 install -r requirements.txt
-CMD [ "python3", "./runserver.py" ]
+CMD [ "code-server" ]
 
